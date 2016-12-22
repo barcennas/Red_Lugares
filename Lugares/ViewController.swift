@@ -19,8 +19,6 @@ class ViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.2389388382, green: 0.5892125368, blue: 0.8818323016, alpha: 1)
-        
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         self.searchController = UISearchController(searchResultsController: nil)
@@ -58,6 +56,21 @@ class ViewController: UITableViewController {
         navigationController?.hidesBarsOnSwipe = true
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let defaults = UserDefaults.standard
+        let hasViewedTutorial = defaults.bool(forKey: "hasViewedTutorial")
+        
+        if hasViewedTutorial {
+            return
+        }
+        
+        if let pageVC = storyboard?.instantiateViewController(withIdentifier: "WalkthroughController") as? TutorialPageViewController {
+                self.present(pageVC, animated: true, completion: nil)
+        }
+    }
+    
     override var prefersStatusBarHidden: Bool{
         return false
     }
@@ -65,6 +78,13 @@ class ViewController: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+    @IBAction func helpPressed(_ sender: Any) {
+        if let pageVC = storyboard?.instantiateViewController(withIdentifier: "WalkthroughController") as? TutorialPageViewController {
+            self.present(pageVC, animated: true, completion: nil)
+        }
     }
     
     
@@ -174,6 +194,9 @@ class ViewController: UITableViewController {
                 let viewDestino = segue.destination as! DetailViewController
                 
                 viewDestino.place = lugarSeleccionado
+                
+                //indica que la barra de navegacion de abajo se oculte
+                //viewDestino.hidesBottomBarWhenPushed = true
                 
             }
             

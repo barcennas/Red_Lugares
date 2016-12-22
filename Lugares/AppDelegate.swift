@@ -17,6 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+        //Se personaliza la barrra de navegacion de la parte superior
+        let blue = #colorLiteral(red: 0.2389388382, green: 0.5892125368, blue: 0.8818323016, alpha: 1).cgColor
+        
+        UINavigationBar.appearance().barTintColor = UIColor(cgColor: blue)
         UINavigationBar.appearance().tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1) //cambia el color del texto de regreso
         
         if let barFont = UIFont(name: "Avenir-Light", size: 20.0){
@@ -24,6 +28,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                                 NSFontAttributeName: barFont]
         }
         
+        
+        //Se personaliza la barrra de navegacion de la parte inferior
+        UITabBar.appearance().tintColor = UIColor(cgColor: blue)
+        UITabBar.appearance().barTintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        //se utiliza para cambiar el color de fondo de cuando se selecciona un icono, utilizando una imagen(del color)
+        //UITabBar.appearance().selectionIndicatorImage = #imageLiteral(resourceName: "tabbaritem-selected")
         
         return true
     }

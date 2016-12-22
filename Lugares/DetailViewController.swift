@@ -166,7 +166,7 @@ extension DetailViewController : UITableViewDataSource, UITableViewDelegate {
             self.performSegue(withIdentifier: "ShowMap", sender: nil)
         case 3:
             //Abrir Pagina Web
-            if let webpageURL = URL(string: "http://\(self.place.webPage)"){
+            if let webpageURL = URL(string: "https://\(self.place.webPage!)"){
                 let app = UIApplication.shared
                 
                 if app.canOpenURL(webpageURL){
